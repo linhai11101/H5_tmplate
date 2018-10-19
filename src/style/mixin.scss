@@ -1,0 +1,78 @@
+
+$lte7:true;
+
+$bg: #F5F5F5;
+$yellow: #FFCB1A;
+$blue: #0093FF;
+$white: #ffffff;
+$black: #333333;
+$color1: #5C5C5C;
+$color2: #9B9B9B;
+
+$REM: 100;
+
+/* px转换为rem */
+@function REM($n) {
+    @return $n/$REM*1rem;
+}
+
+/* 图片在img容器中不变形展示 */ 
+%autoImg{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+/* 清楚缓存 */
+%clearfix { 
+    @if $lte7 { 
+        *zoom: 1; 
+    } 
+    &:before, &:after { 
+        content: ""; 
+        display: table; 
+        font: 0/0 a;
+    } 
+    &:after { 
+        clear: both; 
+    } 
+}
+
+/* flex布局 */
+@mixin fj($type: flex-start){
+    display: flex;
+    justify-content: $type;
+}
+/* 使用border生成三角形 */
+@mixin triangle($dir: top, $size: 10px, $borderColor: #333) {
+    content: "";
+    height: 0;
+    width: 0;
+    @if $dir == top {
+        border: {
+            bottom: $size solid $borderColor;
+            left: $size solid transparent;
+            right: $size solid transparent;
+        }
+    }
+    @else if $dir == bottom {
+        border: {
+            top: $size solid $borderColor;
+            left: $size solid transparent;
+            right: $size solid transparent;
+        }
+    }
+    @else if $dir == left {
+        border: {
+            right: $size solid $borderColor;
+            top: $size solid transparent;
+            bottom: $size solid transparent;
+        }
+    }
+    @else if $dir == bottom {
+        border: {
+            left: $size solid $borderColor;
+            top: $size solid transparent;
+            bottom: $size solid transparent;
+        }
+    }
+} 
